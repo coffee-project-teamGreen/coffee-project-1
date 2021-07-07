@@ -20,10 +20,13 @@ function renderCoffees(coffees) {
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
-    var searchedCoffee = coffeeSearch.value;
     var filteredCoffees = [];
+    var nameSelector = searchBarElement.value;
     coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast || coffee.name === searchedCoffee) {
+        if(roastSelection.value === "all"){
+            selectedRoast = coffee.roast
+        }
+        if (coffee.roast === selectedRoast && coffee.name.toLowerCase().includes(nameSelector.toLowerCase())) {
             filteredCoffees.push(coffee);
         }
     });
@@ -32,26 +35,27 @@ function updateCoffees(e) {
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
 var coffees = [
-    {id: 1, name: 'Light City', roast: 'light' || 'all'},
-    {id: 2, name: 'Half City', roast: 'light' || 'all'},
-    {id: 3, name: 'Cinnamon', roast: 'light' || 'all'},
-    {id: 4, name: 'City', roast: 'medium' || 'all'},
-    {id: 5, name: 'American', roast: 'medium' || 'all'},
-    {id: 6, name: 'Breakfast', roast: 'medium' || 'all'},
-    {id: 7, name: 'High', roast: 'dark' || 'all'},
-    {id: 8, name: 'Continental', roast: 'dark' || 'all'},
-    {id: 9, name: 'New Orleans', roast: 'dark' || 'all'},
-    {id: 10, name: 'European', roast: 'dark' || 'all'},
-    {id: 11, name: 'Espresso', roast: 'dark' || 'all'},
-    {id: 12, name: 'Viennese', roast: 'dark' || 'all'},
-    {id: 13, name: 'Italian', roast: 'dark' || 'all'},
-    {id: 14, name: 'French', roast: 'dark' || 'all'},
+    {id: 1, name: 'Light City', roast: 'light'},
+    {id: 2, name: 'Half City', roast: 'light'},
+    {id: 3, name: 'Cinnamon', roast: 'light'},
+    {id: 4, name: 'City', roast: 'medium'},
+    {id: 5, name: 'American', roast: 'medium'},
+    {id: 6, name: 'Breakfast', roast: 'medium'},
+    {id: 7, name: 'High', roast: 'dark'},
+    {id: 8, name: 'Continental', roast: 'dark'},
+    {id: 9, name: 'New Orleans', roast: 'dark'},
+    {id: 10, name: 'European', roast: 'dark'},
+    {id: 11, name: 'Espresso', roast: 'dark'},
+    {id: 12, name: 'Viennese', roast: 'dark'},
+    {id: 13, name: 'Italian', roast: 'dark'},
+    {id: 14, name: 'French', roast: 'dark'},
 ];
 
+var searchBarElement = document.getElementById('searchBar');
 var tbody = document.querySelector('#coffees');
 var submitButton = document.querySelector('#submit');
 var roastSelection = document.querySelector('#roast-selection');
-var coffeeSearch = document.querySelector('#coffees')
+// var coffeeSearch = document.querySelector('#coffees')
 
 tbody.innerHTML = renderCoffees(coffees);
 
@@ -65,45 +69,7 @@ var potentialResults = ["light", "dark", "medium", "light city", "half city", "c
 
 
 
-var searchBarElement = document.getElementById("searchBar")
-
-searchBarElement.addEventListener("keyup", searchCoffee)
-
-function searchCoffee() {
-    potentialResults.forEach(function (result) {
-
-        var input = searchBarElement.value
-
-        if (result.toLowerCase().includes(input.toLowerCase())) {
-            console.log("Here is a potential result...")
-            console.log(result)
-        }
-
-    })
-}
 
 
+searchBarElement.addEventListener("keyup", updateCoffees)
 
-
-
-
-
-
-
-
-
-
-// var coffeeInput = function() {}
-//
-//     var searchBarElement = document.getElementById("searchBar")
-//     potentialResults.forEach(function (result) {
-//
-//         var whatUserIsSearchingFor = searchBarElement.value
-//
-//         if (result.toLowerCase().includes(whatUserIsSearchingFor.toLowerCase())) {
-//             console.log("Here is a potential result...")
-//             console.log(result)
-//         }
-//
-//     })
-// document.getElementById('searchBar').addEventListener('keyup', listener);
