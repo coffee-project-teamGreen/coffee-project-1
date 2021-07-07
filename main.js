@@ -57,17 +57,53 @@ tbody.innerHTML = renderCoffees(coffees);
 
 submitButton.addEventListener('click', updateCoffees);
 
-var coffeeInput = function() {}
 
-    var searchBarElement = document.getElementById("searchBar")
+var potentialResults = ["light", "dark", "medium", "light city", "half city", "cinnamon",
+"city", "american", "breakfast", "high", "continental", "new orleans",
+"european", "espresso", "viennese", "italian", "french"];
+
+
+
+
+var searchBarElement = document.getElementById("searchBar")
+
+searchBarElement.addEventListener("keyup", searchCoffee)
+
+function searchCoffee() {
     potentialResults.forEach(function (result) {
 
-        var whatUserIsSearchingFor = searchBarElement.value
+        var input = searchBarElement.value
 
-        if (result.toLowerCase().includes(whatUserIsSearchingFor.toLowerCase())) {
+        if (result.toLowerCase().includes(input.toLowerCase())) {
             console.log("Here is a potential result...")
             console.log(result)
         }
 
     })
-document.getElementById('searchBar').addEventListener('keyup', listener);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// var coffeeInput = function() {}
+//
+//     var searchBarElement = document.getElementById("searchBar")
+//     potentialResults.forEach(function (result) {
+//
+//         var whatUserIsSearchingFor = searchBarElement.value
+//
+//         if (result.toLowerCase().includes(whatUserIsSearchingFor.toLowerCase())) {
+//             console.log("Here is a potential result...")
+//             console.log(result)
+//         }
+//
+//     })
+// document.getElementById('searchBar').addEventListener('keyup', listener);
